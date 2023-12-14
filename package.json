@@ -1,0 +1,19 @@
+{
+  "name": "servidor-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "docker-compose up -d mongodb && node src",
+    "dev": "cd src && docker-compose up -d && node . --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "mongoose": "8.0.3"
+  }
+}

@@ -1,0 +1,35 @@
+version: '3'
+services:
+  
+  mongodb:
+    image: mongo:7.0.4
+    container_name: ${MONGO_CONTAINER_NAME}
+    ports:
+      - ${MONGO_PORT}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASS}
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - servidor-node
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${NODE_CONTAINER_NAME}
+    ports:
+      - ${NODE_PORT}
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: ${MONGO_URI}
+    networks:
+      - servidor-node
+
+networks:
+  - servidor-node
+
+volumes:
+  mongodb-data:
